@@ -105,16 +105,21 @@ bool is_s_zeros(std::string dec)
     return true;
 }
 
+//mnożenie w NB, algorytm naiwny, cyfra(słowo) razy cyfra(słowo)
 BigN u_mul(BigN x, BigN y){
     unsigned int res_size = 2* (x.s> y.s ? x.s : y.s);
     BigN res(res_size);
 
-    unsigned long long a;
+    unsigned long long a=0;
 
     for (int i=0; i<y.s; i++){
         for(int j=0; j<x.s; j++){
-            a = (unsigned long long)(y.tab[i]) * x.tab[j];
+            a = (unsigned long long)(y.tab[i]) * (unsigned long long)(x.tab[j]);
+            if(0xffffffff-res.tab[i+j] < (a<<32)>>32) //OVflow check
+                res.tab[i+j+1] +=1;
             res.tab[i+j] += a;
+            if(0xffffffff-res.tab[i+j+1] < a>>32) //OVflow check
+                res.tab[i+j+2] += 1;
             res.tab[i+j+1] += a>>32;
         }
     }

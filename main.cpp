@@ -1,9 +1,6 @@
 #include <iostream>
 #include "include/BigN.h"
 
-
-
-
 using namespace std;
 
 int main()
@@ -21,12 +18,11 @@ int main()
     c->print_hex();
 
     BigN res = u_mul(*a,*b);
-
-    cout<<"wlasciwy wynik :     ";res.print_hex();
-
-
+    cout<<"wlasciwy wynik :     ";
+    res.print_hex();
 
     delete a;
     delete b;
+    delete c;
     return 0;
 }
