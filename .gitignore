@@ -1,3 +1,7 @@
+#codeblocks
+*.layout
+projekt/bin/
+projekt/debug/
 # Prerequisites
 *.d
 

@@ -1,4 +1,4 @@
-#include "../include/BigN.h"
+#include "BigN.h"
 #include <iostream>
 #include <cstdio>
 #include <stdexcept>
