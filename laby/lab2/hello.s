@@ -37,7 +37,7 @@ next:
 	movl $buffer	, %ecx 
 	movl $1024  , %edx 
 	int $0x80
-	movl %eax	,	dataL
+	movl %eax	,	%ecx
 
 	#sprawdz czy trzeba powtorzyc buforowanie
 	movl $0	,	war_next
@@ -47,7 +47,7 @@ next:
 dont_buffer_again:
 
 	#zmiaana znakow
-	movl dataL	, %ecx
+	#movl dataL	, %ecx
 	movl $0	,	%esi
 	movl $0	,	%edi
 
