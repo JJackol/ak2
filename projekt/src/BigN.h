@@ -1,6 +1,7 @@
 #ifndef BIGN_H
 #define BIGN_H
 #include <string>
+#include <fstream>
 
 class BigN
 {
@@ -10,8 +11,10 @@ class BigN
         BigN(BigN &&a);
         BigN(std::string dec , unsigned int _s = 8);
         virtual ~BigN();
-        BigN& operator=(BigN& a);
+        BigN& operator=(const BigN& a);
         void print_hex();
+		void print_hex(const std::ofstream of );
+		std::string to_string_hex();
 
         unsigned int size(){return s;};
 
