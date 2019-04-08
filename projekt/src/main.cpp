@@ -52,7 +52,7 @@ int main()
     delete b;
     delete c;
 
-    test1();
+    test3();
 
     return 0;
 }

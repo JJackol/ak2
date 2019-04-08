@@ -5,14 +5,25 @@ print('hello')
 
 file = open('../test1.txt' , 'w' )
 
-size = 200
+size = 5
+
+
+#random range [a, b]
+#bits = 256
+bits = 1024*7
+#bits = 8192
+#bits = 32768
+
+a = 2**(bits-16)
+b = 2**bits - 1
+
+file.write( str(bits) )
+file.write( '\n' )
 file.write( str(size) )
 file.write( '\n' )
 
-x = 2**256 - 1
-
 for i in range(2*size):
-	x = randint(1, 2**244)
+	x = randint(a, b)
 	file.write( str(x) )
 	file.write( '\n' )
 file.close()

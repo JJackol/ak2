@@ -119,6 +119,8 @@ std::string BigN::to_string_hex()
 	return out;
 }
 
+
+// funkcje nieskładowe
 void divideS_by_2(std::string &dec)
 {
     int ssize= dec.size();

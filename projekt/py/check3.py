@@ -4,7 +4,7 @@ from random import randint
 print('testuje poprawnosc...')
 
 file_in = open('../test1.txt' , 'r' )
-results = open('../res1.txt' , 'r' )
+results = open('../res3.txt' , 'r' )
 bits = int( file_in.readline() )
 i = int( file_in.readline() )
 flag_w = 0

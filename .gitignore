@@ -1,4 +1,5 @@
 #codeblocks
+*.depend
 *.layout
 projekt/bin/
 projekt/debug/
