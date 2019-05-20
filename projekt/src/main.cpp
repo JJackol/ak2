@@ -53,6 +53,10 @@ int main()
     delete c;
 
     test3();
+    cout<<endl;
+//    int x{0xffffffff};
+   // cout<<"x=  "<<x<<endl;
+
 
     return 0;
 }

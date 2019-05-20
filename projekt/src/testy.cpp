@@ -139,8 +139,8 @@ void test3()
 		{
 			in_file >> num1_s;
 			in_file >> num2_s;
-			num1 = new BigN(num1_s,0);
-			num2 = new BigN(num2_s,0);
+			num1 = new BigN(num1_s,0,'h');
+			num2 = new BigN(num2_s,0,'h');
 			tab[ i ] = *num1;
 			tab[ i+1 ] = *num2;
 			std::cout<<i<<" "<< tab[ i ].to_string_hex() << std::endl;
