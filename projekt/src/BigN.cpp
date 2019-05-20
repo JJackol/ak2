@@ -29,15 +29,45 @@ BigN::BigN(BigN &&a) : s(a.s)
         tab[i] = a.tab[i];
 }
 
-BigN::BigN(std::string dec, unsigned int _s) : s(_s)
+BigN::BigN(std::string dec, unsigned int _s, char base) : s(_s)
 {
-	if (_s==0)
+	if(base == 'd')
 	{
-		s = ceil( log2(10)*dec.size() /32.0);
-		//std::cout<<"size calc: "<<s<<std::endl;
+		if (_s==0)
+		{
+			s = ceil( log2(10)*dec.size() /32.0);
+			//std::cout<<"size calc: "<<s<<std::endl;
+		}
+		tab = new unsigned int[s];
+		get_dec(dec);
+
 	}
-    tab = new unsigned int[s];
-    get_dec(dec);
+
+	else if(base == 'h')
+	{
+		for (char& c : dec){
+			if(c>='0' && c<='9')
+				c-= '0';
+			else
+				c-=('a'-10);
+		}
+		std::string hex;
+		//s = ceil( (dec.size()-2)/8.0 );
+		s =  (dec.size()-2)/8 +1;
+		tab = new unsigned int[s];
+		for(unsigned int i=0; i<s; i++)
+			tab[i] = 0; //zerowanie wartosci
+//		int i = dec.size()%8;
+//		hex = dec.substr(0,i);
+//		tab[s-1] = unsigned{hex};
+		//int i;
+		for(int j=0, i=dec.size()-1; i>1 ; i--, j++)
+		{
+            tab[j/8] |= ( unsigned(dec.at(i))<<((j%8)*4) );
+		}
+	}
+	else
+		throw std::invalid_argument("podaj poprawna baze");
 
 }
 

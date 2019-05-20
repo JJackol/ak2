@@ -12,7 +12,7 @@ class BigN
         BigN(unsigned int _s=8);
         BigN(BigN &a);
         BigN(BigN &&a);
-        BigN(std::string dec , unsigned int _s = 8);
+        BigN(std::string dec , unsigned int _s = 8, char base='d');
         virtual ~BigN();
         BigN& operator=(const BigN& a);
 
