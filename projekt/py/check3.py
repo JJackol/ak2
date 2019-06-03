@@ -10,8 +10,8 @@ i = int( file_in.readline() )
 flag_w = 0
 
 for x in range(i):
-	a = int(file_in.readline())
-	b = int(file_in.readline())
+	a = int(file_in.readline(), base=16)
+	b = int(file_in.readline(), base=16)
 	r = int(results.readline(), base=16)
 	if a*b == r:
 		print( x, " good ", r)

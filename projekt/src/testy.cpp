@@ -14,11 +14,11 @@ void test1()
 	BigN *num1, *num2, res;
 	std::ifstream in_file("test1.txt");
 	std::ofstream out_file("res1.txt");
-	int in_len, in_num_size;
+	int in_len, nr_of_input_per_size;
 
 	if( in_file.good() && out_file.good() )
 	{
-		in_file >> in_num_size;
+		in_file >> nr_of_input_per_size;
 		in_file >> in_len;
 		while( !in_file.eof() && in_len-- > 0)
 		{
@@ -49,11 +49,11 @@ void test2()
 	BigN *tab, *num1, *num2;
 	std::ifstream in_file("test1.txt");
 
-	int in_len, in_num_size, i=0;
+	int in_len, nr_of_input_per_size, i=0;
 
 	if( in_file.good() )
 	{
-		in_file >> in_num_size;
+		in_file >> nr_of_input_per_size;
 		in_file >> in_len;
 		tab = new BigN[2*in_len];
 
@@ -107,12 +107,12 @@ void test2()
 	std::ofstream time_file("czasy.csv", std::ios::app);
 	if(out_file.good())
 	{
-		time_file << in_num_size <<','<<in_len<<','<< pomiar.count() <<std::endl;
+		time_file << nr_of_input_per_size <<','<<in_len<<','<< pomiar.count() <<std::endl;
 	}
 	time_file.close();
 
 
-	std::cout <<"wykonanie "<<in_len<<" mnozen "<<in_num_size<<" bitowych liczb zajelo: "
+	std::cout <<"wykonanie "<<in_len<<" mnozen "<<nr_of_input_per_size<<" bitowych liczb zajelo: "
 				<<std::fixed<<std::setprecision (12) << pomiar.count() << " s"<<std::endl;
 
 	delete[] res;
@@ -120,6 +120,7 @@ void test2()
 	out_file.close();
 
 }
+
 void test3()
 {
 	std::string num1_s;
@@ -127,11 +128,11 @@ void test3()
 	BigN *tab, *num1, *num2;
 	std::ifstream in_file("test1.txt");
 
-	int in_len, in_num_size, i=0;
+	int in_len, nr_of_input_per_size, i=0;
 
 	if( in_file.good() )
 	{
-		in_file >> in_num_size;
+		in_file >> nr_of_input_per_size;
 		in_file >> in_len;
 		tab = new BigN[2*in_len];
 
@@ -190,15 +191,109 @@ void test3()
 	std::ofstream time_file("czasy.csv", std::ios::app);
 	if(out_file.good())
 	{
-		time_file << in_num_size <<','<<in_len*powt<<','<< pomiar.count() <<std::endl;
+		time_file << nr_of_input_per_size <<','<<in_len*powt<<','<< pomiar.count() <<std::endl;
 	}
 	time_file.close();
 
 
-	std::cout <<"wykonanie "<<in_len<<" mnozen "<<in_num_size<<" bitowych liczb zajelo: "
+	std::cout <<"wykonanie "<<in_len<<" mnozen "<<nr_of_input_per_size<<" bitowych liczb zajelo: "
 				<<std::fixed<<std::setprecision (12) << pomiar.count() << " s"<<std::endl;
 
 	delete[] res;
+	delete[] tab;
+
+
+}
+
+void test4()
+{
+	std::string num1_s;
+	std::string num2_s;
+	BigN *tab, *num1, *num2;
+	std::ifstream in_file("test1.txt");
+
+	int nr_of_sizes , nr_of_input_per_size, init_in_len, in_len, i=0;
+
+	if( in_file.good() )
+	{
+		in_file >> nr_of_sizes;
+		in_file >> nr_of_input_per_size;
+		in_file >> init_in_len;
+		tab = new BigN[ 2*nr_of_sizes*nr_of_input_per_size ];
+
+		for(int j=1; j<=nr_of_sizes; j++)
+		{
+			i = 0;
+			in_len = init_in_len*j;
+
+			while( !in_file.eof() && i < 2*nr_of_input_per_size )
+			{
+				in_file >> num1_s;
+				in_file >> num2_s;
+				num1 = new BigN(num1_s,0,'h');
+				num2 = new BigN(num2_s,0,'h');
+				tab[ 2*nr_of_input_per_size*(j-1) + i ] = *num1;
+				tab[ 2*nr_of_input_per_size*(j-1) + i+1 ] = *num2;
+				std::cout<<(j-1)*nr_of_input_per_size*2 + i<<" "<< tab[ 2*nr_of_input_per_size*(j-1) + i ].to_string_hex() << std::endl;
+				std::cout<<(j-1)*nr_of_input_per_size*2 + i+1<<" "<< tab[ 2*nr_of_input_per_size*(j-1) + i +1].to_string_hex() << std::endl;
+
+				delete num1;
+				delete num2;
+				i+=2;
+
+			}
+		}
+
+	}
+	in_file.close();
+
+	//pomiar czasu
+	std::chrono::high_resolution_clock::time_point t1;
+	std::chrono::high_resolution_clock::time_point t2;
+
+
+	//BigN *res = new BigN[nr_of_sizes*nr_of_input_per_size];
+
+
+
+	for(int k=0; k< nr_of_sizes; k++)
+	{
+
+		in_len = init_in_len*(k+1);
+
+
+		t1 = std::chrono::high_resolution_clock::now();
+
+		for(int j = 0 ; j<nr_of_input_per_size ; j++)
+		{
+			//res[in_len*k+j] = u_mul( tab[2*j] , tab[2*j+1] );
+			u_mul( tab[ 2*nr_of_input_per_size*(k) + 2*j] , tab[ 2*nr_of_input_per_size*(k) + 2*j+1] );
+		}
+
+		t2 = std::chrono::high_resolution_clock::now();
+		std::chrono::duration<double> pomiar = std::chrono::duration_cast<std::chrono::duration<double>>(t2 - t1);
+		std::cout <<"wykonanie mnozen zajelo: "<<std::fixed<<std::setprecision (12) << pomiar.count() << " s"<<std::endl;
+
+
+
+		std::ofstream time_file("czasy_hex.csv", std::ios::app);
+		if(time_file.good())
+		{
+			time_file << nr_of_input_per_size <<','<<in_len<<','<< pomiar.count() <<std::endl;
+		}
+		time_file.close();
+
+		std::cout <<"wykonanie "<<in_len<<" mnozen "<<nr_of_input_per_size<<" bitowych liczb zajelo: "
+				<<std::fixed<<std::setprecision (12) << pomiar.count() << " s"<<std::endl;
+	}
+
+
+
+
+
+
+
+	//delete[] res;
 	delete[] tab;
 
 

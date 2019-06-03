@@ -12,7 +12,12 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-pedantic" />
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-std=c++0x" />
 					<Add option="-g" />
+					<Add directory="src" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -22,6 +27,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="src" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -32,9 +38,11 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="include/BigN.h" />
-		<Unit filename="main.cpp" />
 		<Unit filename="src/BigN.cpp" />
+		<Unit filename="src/BigN.h" />
+		<Unit filename="src/main.cpp" />
+		<Unit filename="src/testy.cpp" />
+		<Unit filename="src/testy.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
