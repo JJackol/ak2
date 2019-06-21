@@ -7,7 +7,7 @@ file = open('../test1.txt' , 'w' )
 
 nr_of_sizes = 50 
 
-nr_of_input = 100
+nr_of_input = 10
 
 
 #random range [a, b]

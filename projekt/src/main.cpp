@@ -58,11 +58,10 @@ int main()
 //    delete c;
 
 //    for(int i =0; i<2; i++)
-//		test4();
+		test4();
 
     cout<<endl;
-//    int x{0xffffffff};
-   // cout<<"x=  "<<x<<endl;
+
 
 
     return 0;
